@@ -1,1 +1,5 @@
-{"componentChunkName":"component---src-templates-tag-js","path":"/pensieve/tags/algo/","result":{"data":{"allMarkdownRemark":{"totalCount":1,"edges":[{"node":{"frontmatter":{"title":"Algorithm","description":"Most popular algorithms from other categories, including DP, Greedy algorithm, etc.","date":"2019-12-07T00:00:00.000Z","slug":"/pensieve/markdown-playground","tags":["Algo","DS","C++"]}}}]}},"pageContext":{"tag":"Algo"}},"staticQueryHashes":["1994492073","2375053088","3391063840","951144397"]}
+{
+    "componentChunkName": "component---src-templates-tag-js",
+    "path": "/pensieve/tags/algo/",
+    "result": {"data":{"allMarkdownRemark":{"totalCount":1,"edges":[{"node":{"frontmatter":{"title":"Algorithm","description":"Most popular algorithms from other categories, including DP, Greedy algorithm, etc.","date":"2019-12-07T00:00:00.000Z","slug":"/pensieve/markdown-playground","tags":["Algo","DS","C++"]}}}]}},"pageContext":{"tag":"Algo"}},
+    "staticQueryHashes": ["1994492073","2375053088","3391063840","951144397"]}
