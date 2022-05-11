@@ -1,5 +1,5 @@
 {
     "componentChunkName": "component---src-templates-post-js",
     "path": "/pensieve/markdown-playground",
-    "result": {"data":{"markdownRemark":{"html":"<p>Implemention of AWS-Cognito With nodejs</p>","frontmatter":{"title":"AWS-Cognito","description":"Implemention of AWS-Cognito With nodejs","date":"2019-12-07T00:00:00.000Z","slug":"/pensieve/markdown-playground","tags":null}}},"pageContext":{}},
+    "result": {"data":{"markdownRemark":{"html":"<p>This is a web application developed on MERN stack. Back-end services is developed with NodeJs and front-end developed with ReactJs . This app allows individuals to keep their exercise schedule on App. They can delete a schedule when it becomes complete. They can keep notes on the individual schedules.</p>","frontmatter":{"title":"exercise-tracker","description":"exercise-tracker","date":"2019-12-07T00:00:00.000Z","slug":"/pensieve/markdown-playground","tags":null}}},"pageContext":{}},
     "staticQueryHashes": ["1994492073","2375053088","3391063840","951144397"]}
