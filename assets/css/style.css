@@ -2165,7 +2165,8 @@ textarea.form-input::-webkit-resizer {
   background-color: var(--orange-yellow-crayola);
   color: black;
   border-radius: 20px;
-  padding: 6px 12px;
+  padding: 3px 10px;
   margin: 4px;
   font-size: 14px;
+  font-weight: bold;
 }
