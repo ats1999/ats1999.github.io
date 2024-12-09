@@ -4,7 +4,7 @@ const nextConfig = {
   output: "export",
   images: { unoptimized: true },
   trailingSlash: true,
-  assetPrefix: "",
+  assetPrefix: "https://ats1999.github.io",
 };
 
 export default nextConfig;
