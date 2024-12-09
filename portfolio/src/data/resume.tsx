@@ -43,7 +43,7 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blog", icon: NotebookIcon, label: "Blog" },
+    // { href: "/blog", icon: NotebookIcon, label: "Blog" },
   ],
   contact: {
     email: "hello@example.com",
@@ -81,6 +81,12 @@ export const DATA = {
         icon: Icons.email,
 
         navbar: false,
+      },
+      lc: {
+        name: "Leet Code",
+        url: "https://leetcode.com/u/dsabyte/",
+        icon: Icons.lc,
+        navbar: true,
       },
     },
   },
