@@ -35,18 +35,26 @@ export default function Page() {
               <div>
                 <PrayIcon />
               </div>
-              <BlurFadeText
-                delay={BLUR_FADE_DELAY}
-                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
-                yOffset={8}
-                text={`नमस्ते, I'm ${DATA.name.split(" ")[0]} `}
-              />
+              <div className="greet">
+                <BlurFadeText
+                  delay={BLUR_FADE_DELAY}
+                  className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+                  yOffset={8}
+                  text={`नमस्ते, I'm ${DATA.name.split(" ")[0]} `}
+                />
+              </div>
 
-              <BlurFadeText
-                className="max-w-[600px] md:text-xl"
-                delay={BLUR_FADE_DELAY}
-                text={DATA.description}
-              />
+              <div
+                style={{
+                  fontFamily: "monospace",
+                }}
+              >
+                <BlurFadeText
+                  className="max-w-[600px] md:text-xl"
+                  delay={BLUR_FADE_DELAY}
+                  text={DATA.description}
+                />
+              </div>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-28 border">
