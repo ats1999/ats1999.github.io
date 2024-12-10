@@ -47,6 +47,7 @@ export default function Page() {
               <div
                 style={{
                   fontFamily: "monospace",
+                  marginTop: "50px",
                 }}
               >
                 <BlurFadeText

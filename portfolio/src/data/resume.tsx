@@ -3,10 +3,10 @@ import { HomeIcon, NotebookIcon } from "lucide-react";
 
 export const DATA = {
   name: "Rahul Kumar",
-  initials: "DV",
+  initials: "RK",
   url: "https://ats1999.github.io",
   location: "Delhi, India",
-  locationLink: "https://www.google.com/maps/place/sanfrancisco",
+  locationLink: "https://www.google.com/maps/place/delhi",
   description: "I'm a Software Engineer working at @AdPushup",
   summary:
     "I enjoy turning complex problems into simple, scalable and maintainable products. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.",
