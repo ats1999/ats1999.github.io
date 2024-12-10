@@ -138,6 +138,34 @@ export default function Page() {
           </div>
         </div>
       </section>
+      <section id="latest-blogs">
+        <div className="space-y-5 w-full py-12">
+          <BlurFade delay={BLUR_FADE_DELAY * 11}>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                  Latest Blogs{" "}
+                </div>
+              </div>
+            </div>
+          </BlurFade>
+          {DATA.latestBlogs.map((education, id) => (
+            <BlurFade
+              key={education.url}
+              delay={BLUR_FADE_DELAY * 8 + id * 0.05}
+            >
+              <Link
+                className="text-blue-500 hover:underline"
+                href={education.url}
+                target="_blank"
+              >
+                {education.title}
+              </Link>
+            </BlurFade>
+          ))}
+        </div>
+      </section>
+
       <section id="projects">
         <div className="space-y-12 w-full py-12">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>

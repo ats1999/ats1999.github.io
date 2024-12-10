@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 
 export const DATA = {
   name: "Rahul Kumar",
@@ -9,7 +9,7 @@ export const DATA = {
   locationLink: "https://www.google.com/maps/place/delhi",
   description: "I'm a Software Engineer working at @AdPushup",
   summary:
-    "I enjoy turning complex problems into simple, scalable and maintainable products. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.",
+    "I enjoy turning complex problems into simple, scalable and maintainable solutions. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.",
   avatarUrl: "/me.png",
   skills: [
     "Java",
@@ -40,6 +40,25 @@ export const DATA = {
     "Jenkins",
     "Pm2",
     "Docker",
+  ],
+  latestBlogs: [
+    {
+      title:
+        "Synchronization in Distributed Task Processing: Leveraging Distributed Locks",
+      url: "https://www.dsabyte.com/blog/engineering/system-design/Synchronization-in-Distributed-Task-Processing-Leveraging-Distributed-Locks-1c43d996-0384-491a-b314-fb7705366c24",
+    },
+    {
+      title: "Graceful Shutdown & Spring Boot",
+      url: "https://www.dsabyte.com/blog/engineering/full-stack/spring-boot/Graceful-Shutdown--Spring-Boot-6d136544-f4e1-427b-b4b6-3285bfed877f",
+    },
+    {
+      title: "Using Custom Annotation in Spring Boot",
+      url: "https://www.dsabyte.com/blog/engineering/full-stack-development/back-end/spring-boot/Custom-Annotation--Spring-Boot-ab208895-83fc-4196-9049-b4f5be4ef457",
+    },
+    {
+      title: "Learn how to make HTTP request using plan Java Socket",
+      url: "https://www.dsabyte.com/blog/engineering/programming/java/Learn-how-to-make-HTTP-request-using-plan-Java-Socket-6b924558-1273-4bf6-b97e-8ba7aa3b34e3",
+    },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -102,7 +121,7 @@ export const DATA = {
       start: "Jan 2022",
       end: "Present",
       description:
-        "My job is to design, design and build Ad.Tech products for programmatic advertising , make changes to the existing products, conduct POCs(Proof of concepts), research about new tools and technologies. My day-to-day tasks involve writing clean, maintainable code, implementing algorithms for bid optimization, design discussions, PR reviews, integrating with third-party ad exchanges, bidders, and optimizing system performance for low latency and high throughput.",
+        "At AdPushup, I design and develop cutting-edge AdTech solutions, optimize programmatic advertising systems, conduct POCs, and integrate with third-party ad exchanges to deliver high-performance, low-latency solutions.",
     },
     {
       company: "Vyorius",
@@ -114,7 +133,7 @@ export const DATA = {
       start: "May 2021",
       end: "Nov 2021",
       description:
-        "As a Full Stack Developer at Vyorius, I spearheaded the development of a real-time unmanned drone delivery system. My responsibilities included architecting and implementing dashboards for drone maintenance, delivery, and route planning, leveraging WebSockets and RabbitMQ for distributed load balancing and real-time data streaming.",
+        "As a Full Stack Developer at Vyorius, I did the development of a real-time drone delivery system, creating dashboards for maintenance, delivery, and route planning while implementing WebSockets and RabbitMQ for real-time data streaming and distributed load balancing.",
     },
   ],
   education: [
