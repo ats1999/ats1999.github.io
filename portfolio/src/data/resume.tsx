@@ -8,8 +8,11 @@ export const DATA = {
   location: "Delhi, India",
   locationLink: "https://www.google.com/maps/place/delhi",
   description: "I'm a Software Engineer working at @AdPushup",
-  summary:
-    "I enjoy turning complex problems into simple, scalable and maintainable solutions. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.",
+  summary: `
+I enjoy turning complex problems into simple, scalable and maintainable solutions. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
+
+I began coding in 2019 when I became interested in making a website. I still remember when I ran my first for loop in the turbo c++ console. Since then, I've been programming as a hobby. Around 3 years ago, I ramped up my learning and have been waking up at 4AM to study.
+  `,
   avatarUrl: "/me.png",
   skills: [
     "Java",
@@ -173,6 +176,29 @@ export const DATA = {
   ],
   // freecodecamp
   projects: [
+    {
+      title: "Dakia: A Powerful and Flexible API Gateway",
+      href: "https://github.com/ats1999/dakia",
+      dates: "Sept 2024 - Present",
+      active: true,
+      description:
+        "Dakia is a flexible API Gateway that simplifies traffic management for modern, distributed architectures. It supports dynamic configuration, zero downtime upgrades, and advanced routing, making it an ideal solution for scalable and customizable API management.",
+      technologies: ["Rust", "Linux", "TCP", "HTTP", "Socket", "Networking"],
+      links: [
+        {
+          type: "Website",
+          href: "https://github.com/ats1999/dakia",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/ats1999/dakia",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/projects/dakia.png",
+      video: "",
+    },
     {
       title: "Distribted URL Shortner",
       href: "https://github.com/ats1999/URL-Shortner?tab=readme-ov-file",
