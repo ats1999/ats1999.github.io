@@ -11,7 +11,7 @@ export const DATA = {
   summary: `
 I enjoy turning complex problems into simple, scalable and maintainable solutions. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
 
-I began coding in 2019 when I became interested in making a website. I still remember when I ran my first for loop in the turbo c++ console. Since then, I've been programming as a hobby. Around 3 years ago, I ramped up my learning and have been waking up at 4AM to study.
+I began coding in 2019 when I was in 2nd year of engineering. I still remember when I ran my first for loop in the turbo c++ terminal. Since then, I've been programming as a hobby. Around 3 years ago, I ramped up my learning and have been waking up at 4AM to study.
   `,
   avatarUrl: "/me.png",
   skills: [
@@ -177,12 +177,12 @@ I began coding in 2019 when I became interested in making a website. I still rem
   // freecodecamp
   projects: [
     {
-      title: "Dakia: A Powerful and Flexible API Gateway",
+      title: "Dakia: The Developer-Centric API Gateway",
       href: "https://github.com/ats1999/dakia",
       dates: "Sept 2024 - Present",
       active: true,
       description:
-        "Dakia is a flexible API Gateway that simplifies traffic management for modern, distributed architectures. It supports dynamic configuration, zero downtime upgrades, and advanced routing, making it an ideal solution for scalable and customizable API management.",
+        "Dakia is an advanced API Gateway designed with developers in mind, offering a fully configurable, extensible and programmable solution. With Dakia, developers are treated as first-class citizens, enabling them to customize and tailor the gateway to fit the unique needs...",
       technologies: ["Rust", "Linux", "TCP", "HTTP", "Socket", "Networking"],
       links: [
         {
@@ -245,6 +245,33 @@ I began coding in 2019 when I became interested in making a website. I still rem
         },
       ],
       image: "/projects/ogp.png",
+      video: "",
+    },
+    {
+      title: "dsabyte - Multi author blogging platform",
+      href: "https://dsabyte.com",
+      dates: "Jav 2021 - Jan 2021",
+      active: true,
+      description:
+        "Designed and developed a multi-author blogging platform that empowers users to create, manage, and share content seamlessly. Implemented robust features for author collaboration and content scheduling.",
+      technologies: [
+        "Next.js",
+        "Typescript",
+        "Node.js",
+        "ChakraUI",
+        "Vercel",
+        "Serverless",
+        "MongoDB",
+        "algolia",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://dsabyte.com",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/projects/dsabyte.png",
       video: "",
     },
   ],
