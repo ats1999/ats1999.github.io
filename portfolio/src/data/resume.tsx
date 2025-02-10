@@ -62,6 +62,11 @@ I began coding in 2019 when I was in 2nd year of engineering. I still remember w
       title: "Learn how to make HTTP request using plan Java Socket",
       url: "https://www.dsabyte.com/blog/engineering/programming/java/Learn-how-to-make-HTTP-request-using-plan-Java-Socket-6b924558-1273-4bf6-b97e-8ba7aa3b34e3",
     },
+    {
+      title:
+        "Designing a Scalable Auto-Increment System for Grouped Identifiers in PostgreSQL",
+      url: "https://medium.com/@ats1999/designing-a-scalable-auto-increment-system-for-grouped-identifiers-in-postgresql-d103721453bb",
+    },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },

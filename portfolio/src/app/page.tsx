@@ -149,20 +149,33 @@ export default function Page() {
               </div>
             </div>
           </BlurFade>
-          {DATA.latestBlogs.map((education, id) => (
-            <BlurFade
-              key={education.url}
-              delay={BLUR_FADE_DELAY * 8 + id * 0.05}
+          <BlurFade delay={BLUR_FADE_DELAY * 8 * 0.05}>
+            <ul
+              style={{
+                listStyleType: "disclosure-closed",
+                gap: "10px",
+              }}
+              id="latest-blogs-list"
             >
-              <Link
-                className="text-blue-500 hover:underline"
-                href={education.url}
-                target="_blank"
-              >
-                {education.title}
-              </Link>
-            </BlurFade>
-          ))}
+              {[...DATA.latestBlogs].reverse().map((blog, id) => (
+                <li
+                  key={blog.url}
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                  className="latest-blogs-list-item"
+                >
+                  <Link
+                    className="text-blue-500 hover:underline"
+                    href={blog.url}
+                    target="_blank"
+                  >
+                    {blog.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </BlurFade>
         </div>
       </section>
 
