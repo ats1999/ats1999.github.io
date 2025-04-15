@@ -64,8 +64,8 @@ I began coding in 2019 when I was in 2nd year of engineering. I still remember w
     },
     {
       title:
-        "Designing a Scalable Auto-Increment System for Grouped Identifiers in PostgreSQL",
-      url: "https://medium.com/@ats1999/designing-a-scalable-auto-increment-system-for-grouped-identifiers-in-postgresql-d103721453bb",
+        "A simple group scoped counter system (PostgreSQL/MongoDB/MySql)",
+      url: "/blog/counter-system",
     },
   ],
   navbar: [
