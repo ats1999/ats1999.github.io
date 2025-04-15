@@ -1,0 +1,71 @@
+---
+title: "A simple group scoped counter system (PostgreSQL/MongoDB/MySql)"
+publishedAt: "2024-06-18"
+summary: "Id of every new task in JIRA board starts with 1 and increments by 1 for each new task. There isn’t any database that supports group scoped auto increment. Let's explore some solutions in this blog."
+---
+
+Id of every new task in JIRA board starts with 1 and increments by 1 for each new task. There isn’t any database that supports group scoped auto increment. Let's explore some solutions in this blog.
+
+## Using auto increment (MySql/PostgreSQL)
+
+- Counters are scoped to table
+- We can not use different counter for different group
+
+## Using sequence in PostgreSQL
+
+- They are database level objects, so every group we can create new sequence
+- PostgreSQL sequence is large in size when compared to counter. Every PostgreSQL sequence object takes around ~8KB.
+
+## Using counter table (PostgreSQL/MongoDB)
+
+We can use counter table to solve above problems.
+
+- Counter table is simple to build and use
+- It is storage efficient, it takes only few bytes per counter as compared to ~8KB in PostgreSQL sequence
+- It works for group scoped counter, for every group a new row can be inserted
+
+```txt
+    Column     |            Type             | Collation | Nullable | Default
+---------------+-----------------------------+-----------+----------+---------
+ name          | character varying(255)      |           | not null |
+ value         | bigint                      |           | not null |
+```
+
+> Query to update the counter and return updated value in one round trip
+
+```sql
+UPDATE counter
+SET
+  value = value+1
+WHERE
+  name = :counterName
+RETURNING value
+```
+
+> **Note**: In MongoDB, you can use a dedicated document for each counter similar to dedicated row in PostgreSQL/MySql
+
+## Scaling Challanges
+
+> You must be a very big company(like google, microsoft) before you hit the limit.
+
+Scaling above counter system very simple, let's start from zero and scale it to handle large number of requests.
+
+### Scaling: Counter table in the same database
+
+If you are not an enterprice or huge tech gaint(google/amazon), you can start with keeping the counter table along with other tables in database.
+
+### Scaling: Moving counter table to a dedicated database
+
+If you hit the limit, and counter table is frequently used. You can move counter table to a dedicated database. It'll allows you to scale up/down your counter service as per your need. For most of the companies, vertical scaling should be enough.
+
+### Scaling: Using sharding
+
+If you hit the limit of vertical scale, you can use sharding. Keep different counters on different databases. This way, you'll be able to achieve ultimate scale.
+
+### Scaling: beyond sharding
+
+Congratulations 👏
+
+## Summary
+
+A lightweight, scalable, and durable group-scoped counter system can be built using a simple counter table or document in PostgreSQL/MongoDB, avoiding the limitations of auto-increment and heavy database sequences.
