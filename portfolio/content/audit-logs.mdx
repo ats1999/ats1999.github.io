@@ -1,0 +1,122 @@
+---
+title: "Building Consistent Audit Log System with Change Data Capture (CDC)"
+publishedAt: "2025-02-05"
+summary: "Capturing reliable and consistent audit logs is essential for traceability, compliance, and debugging. This blog explores how to build a consistent audit logging system using Change Data Capture (CDC). We’ll cover the core concepts of CDC, how it enables reliable tracking of database changes, and practical implementation tips to ensure your logs are complete, ordered, and tamper-resistant."
+---
+
+Capturing reliable and consistent audit logs is essential for traceability, compliance, and debugging. This blog explores how to build a consistent audit logging system using Change Data Capture (CDC). We’ll cover the core concepts of CDC, how it enables reliable tracking of database changes, and practical implementation tips to ensure your logs are complete, ordered, and tamper-resistant.
+
+> This blog assumes that you know about CDC and audit logs individually
+
+## Other ways than CDC
+
+### Logging from application code
+
+```text
+saveToDb(...);
+saveToAuditLogStorage(...); // ES or any other audit log storage
+```
+
+- **Consistency** - There are scenarios where an update to the database might succeed, but the corresponding update to the audit log fails, or vice versa.
+- **Direct DB Change** - Changes made direcly in the database will never get logged into audit log stoarge.
+- **Maintenance** - As we split our codebase into smaller microservices, cron jobs, and consumers, maintaining consistent audit log functionality across all these components becomes challenging and prone to duplication and missing changes.
+
+### Polling the Database Periodically
+
+- Inefficient and creates lag between data change and log capture.
+- May miss rapid changes or overwrite before polling sees them.
+- Puts unnecessary load on the database.
+- Know information about the user made the change. It can be solved by adding `last_modified_by` in table schema.
+
+### Database Triggers Writing to an Audit Table
+
+[Learn more about trigger](https://www.postgresql.org/docs/current/sql-createtrigger.html)
+
+Database triggers solves above issues, but it leads to following issues.
+
+- **Maintenance** - Database triggers are hard to maintain because of lack of visibility in code, complex debugging, extra change required in trigger when changing table schema.
+- **ORM Support** - ORMs does not support database trigger, so schema needs to be handled manually.
+
+## Using Change Data Capture (CDC)
+
+Change Data Capture (CDC) is a technique used to track and capture changes made to data in a database or data store. It is typically used to identify and capture inserts, updates, and deletes that occur in a database, and then move or process those changes to other systems or components in real time or in near real time.
+
+> I'll not show how to setup CDC, for that you can refer [CDC With ProstgresSQL](/blog/cdc-postgressql)
+
+In simple terms, CDC will stream row level changes made into database in JSON format.
+
+Let's understant it through an example, consider we are having a row in database table `user` with 1 user.
+
+```text
+{
+  "id:1,
+  "name:"Rahul Kumar"
+}
+```
+
+Now, if someone updates the user's name to `Rahul Thakur`, the database will emit the following CDC event:
+
+```text
+{
+  "id:1,
+  "name:"Rahul Thakur"
+}
+```
+
+> Acutal CDC event will have other meta data properties, like transaction id, LSN, operation type(c,u,d,t) and more. They are omited here for simplicity.
+
+CDC will ensure that every update is received to your CDC consumer, no matter if you are updating database from app server, shell script, cron jobs or from anywhere. This gurrantee solves the problem of consistency, maintenance and direct DB updates.
+
+CDC events can be written to MongoDB, seperate audit log table or S3/Blob stoarge.
+
+### Storing Actor Information in Audit Logs Using CDC
+
+CDC events does not contain any information about who made the change. There are two ways we can use capture actor information when using CDC:
+
+1. Using outbox table
+2. Adding actor information in table schema itself
+
+#### 1. Outbox table
+
+We can create a table for storing audit logs along with actor information
+
+Simple **audit_log** table schema
+
+```text
+- actor - who made change?
+- timestamp - when change was made?
+- data - what was the change?
+```
+
+Using above table, we can write updates to Db as well as in `audit_log` table in the same transaction. Now, we can setup CDC on **audit_log** table to update audit logs.
+
+It has the following issues:
+
+- **Maintenance** - See `Logging from application code#Maintenance` above
+- **Cleanup Service** - We often keep audit logs aways from primary data store. When using outbox table, we need to perform periodic cleanup.
+- **Extra Storage** - Extra storage is required to store audit logs information.
+
+#### 2. Adding actor information in table schema itself
+
+We can modify the schema of table and add actor information as following.
+
+**book_table**
+
+```text
+- created_by - who created?
+- last_modified_by - who made change?
+---- others columns ----
+```
+
+When using CDC `created_by` and `last_modified_by` will be sent along with each event.
+
+### When you don't need actor information?
+
+Actor information is not always necessary, for example personal taks management app. In personal taks management app, users will always modify their own tasks. There is no shared tasks that can be modifed by multiple users. So, it's unnecessary to work hard on keeping the actor information in audit logs.
+
+In some applications, we usually get mix of situations. A careful design can eliminate the need to actor information.
+
+## Bonus
+
+- Instead of storing entire row each time change is made, you can store only diffrences between last version and current change. `https://www.npmjs.com/package/jsondiffpatch` can be used to extract diffrences between two JSON string and create the complete JSON by iterating over the diffrences.
+- You can use the concept of compaction to minimise storage cost(Case to case basis)
