@@ -41,7 +41,7 @@ Database triggers solves above issues, but it leads to following issues.
 
 Change Data Capture (CDC) is a technique used to track and capture changes made to data in a database or data store. It is typically used to identify and capture inserts, updates, and deletes that occur in a database, and then move or process those changes to other systems or components in real time or in near real time.
 
-> I'll not show how to setup CDC, for that you can refer [CDC With ProstgresSQL](/blog/cdc-postgressql)
+> I'll not show how to setup CDC, for that you can refer [CDC With ProstgresSQL](/blog/wal-cdc-postgressql)
 
 In simple terms, CDC will stream row level changes made into database in JSON format.
 
@@ -120,3 +120,4 @@ In some applications, we usually get mix of situations. A careful design can eli
 
 - Instead of storing entire row each time change is made, you can store only diffrences between last version and current change. `https://www.npmjs.com/package/jsondiffpatch` can be used to extract diffrences between two JSON string and create the complete JSON by iterating over the diffrences.
 - You can use the concept of compaction to minimise storage cost(Case to case basis)
+- [CDC ProstgresSQL](/blog/wal-cdc-postgressql)
