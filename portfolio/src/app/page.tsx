@@ -157,7 +157,7 @@ export default function Page() {
               }}
               id="latest-blogs-list"
             >
-              {[...DATA.latestBlogs].reverse().map((blog, id) => (
+              {[{ title: "View More", url: "/blog" }, ...DATA.latestBlogs].reverse().map((blog, id) => (
                 <li
                   key={blog.url}
                   style={{
@@ -168,7 +168,6 @@ export default function Page() {
                   <Link
                     className="text-blue-500 hover:underline"
                     href={blog.url}
-                    target="_blank"
                   >
                     {blog.title}
                   </Link>
