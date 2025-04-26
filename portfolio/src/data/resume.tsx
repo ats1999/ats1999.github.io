@@ -67,6 +67,13 @@ I began coding in 2019 when I was in 2nd year of engineering. I still remember w
         "A simple group scoped counter system (PostgreSQL/MongoDB/MySql)",
       url: "/blog/counter-system",
     },
+    {
+      title: "Building Consistent Audit Log System with Change Data Capture (CDC)",
+      url: "/blog/audit-logs"
+    }, {
+      title: "Write-Ahead Logging (WAL), Change Data Capture (CDC) & PostgreSQL",
+      url: "/blog/wal-cdc-postgressql"
+    }
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
