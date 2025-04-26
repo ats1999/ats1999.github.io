@@ -157,7 +157,7 @@ export default function Page() {
               }}
               id="latest-blogs-list"
             >
-              {[{ title: "View More", url: "/blog" }, ...DATA.latestBlogs].reverse().map((blog, id) => (
+              {[{ title: "View More", url: "/blog/" }, ...DATA.latestBlogs].reverse().map((blog, id) => (
                 <li
                   key={blog.url}
                   style={{
