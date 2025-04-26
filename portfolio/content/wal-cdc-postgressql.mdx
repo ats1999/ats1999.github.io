@@ -1,0 +1,185 @@
+---
+title: "Write-Ahead Logging (WAL), Change Data Capture (CDC) & Debezium"
+publishedAt: "2025-04-24"
+summary: "In this article, we dive into the core concepts of Write-Ahead Logging (WAL) and Change Data Capture (CDC) — two critical mechanisms for ensuring data durability, consistency, and real-time data streaming. We explain how WAL provides fault tolerance in databases by recording changes before applying them, and how CDC enables capturing and propagating data changes across systems in near real-time. This post also outlines industry best practices for implementing WAL and CDC in PostgreSQL"
+---
+
+In this article, we dive into the core concepts of Write-Ahead Logging (WAL) and Change Data Capture (CDC) — two critical mechanisms for ensuring data durability, consistency, and real-time data streaming. We explain how WAL provides fault tolerance in databases by recording changes before applying them, and how CDC enables capturing and propagating data changes across systems in near real-time. This post also outlines industry best practices for implementing WAL and CDC in PostgreSQL.
+
+> We'll use PostgreSQL in this blog, but the core concepts remains similar in other databases.
+
+## What is WAL?
+
+WAL is a database mechanism that logs every changes made to database before applying them to database. It ensures durability and crash recovery.
+
+#### Key Points:
+
+- WAL logs are not human friendly
+- Used internally by databases (e.g., PostgreSQL, MySQL).
+- Focused on write performance, data integrity and recovery.
+- Logs every write (insert/update/delete) operation sequentially.
+- Typically not designed for external consumption.
+
+Use Case:
+Database recovery, replication, and ensuring ACID compliance in transactional systems.
+
+## What is CDC?
+
+CDC is a technique to capture changes made into the database and make them available to external systems in near real-time.
+
+#### Key Points:
+
+- CDC can be human friendly
+- CDC mostly used by external system to react on database changes(e.g notification, audit logs, analytics, etc)
+- Mostly CDC is used via WAL logs, but can be implemented without WAL using DB pooling, triggers, timestamps, etc
+
+---
+
+---
+
+Now we have understanding of WAL and CDC. Let's deep dive into WAL first, then we'll use WAL to setup CDC.
+
+## Why DBMS uses WAL?
+
+The main reason for the databases to use WAL is performance and data integrity. To maintain data integrity, database systems needs to synchronously write (flush & sync) the updated page from shared memory to disk whenever a tuple is inserted, updated or deleted. However, this approach results in poor performance.
+
+Database systems logs all changes and actions into WAL logs files. While actual tuple updates are kept in memory and synced with disk asynchronously. Database can use WAL logs to recover from crash, in case database crashed after writing to WAL logs but before synchronizing changes with disk.
+
+WAL logs are also used for [Online Backup and Point-In-Time Recovery (PITR)](https://www.interdb.jp/pg/pgsql10.html), [Streaming Replication](https://www.interdb.jp/pg/pgsql11.html), [2PC](https://www.postgresql.org/docs/current/two-phase.html), etc.
+
+## CDC, WAL & PostgreSQL
+
+The intent of CDC is to capture the changes made to the database, no matter how you achieve it.
+
+There are different ways to implement CDC:
+
+- Using WAL
+- [Using timestamp column in the table and periodically polling the database](/blog/audit-logs/)
+- [Using database trigger to write every update into another table](/blog/audit-logs/)
+
+In context of WAL, CDC is a human friendly decoding of WAL logs.
+
+Let's understand few terms before we jump on setting up CDC
+
+- [Logical Decoding](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html) - It is a feature in PostgreSQL, that can be used to parse WAL logs into easy to use format.
+- [Replication Slot](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-REPLICATION-SLOTS) - Replication slot is a kind of queue which is used by PostgreSQL to stream changes to client. PostgreSQL replication slots should be unique to the client. We can create multiple replication slots if multiple clients required.
+- [Output Plugins](https://www.postgresql.org/docs/current/logicaldecoding-explanation.html#LOGICALDECODING-EXPLANATION-OUTPUT-PLUGINS) - Output plugins are used in conjunction with logical decoding to customize the format or mechanism of streaming the changes. They convert changes in WAL into a format that can be consumed by external systems.
+- [Publication](https://www.postgresql.org/docs/current/logical-replication-publication.html) - Publication defines which tables/changes are available to replicate
+
+### PostgreSQL setup for logical decoding
+
+#### Sample table for demo
+
+```sql
+-- We'll be using `post` table throughout the blog
+CREATE TABLE post (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    content TEXT
+);
+```
+
+#### Configure PostgreSQL
+
+Open the `postgresql.conf` file on the publisher server (where the data will be replicated from). Make sure the following settings are enabled:
+
+```text
+# Enable logical replication
+wal_level = logical
+
+# Set maximum number of replication slots
+max_replication_slots = 4  # Adjust this based on your needs
+
+# Set maximum number of replication subscriptions
+max_replication_subscriptions = 4  # Adjust this based on your needs
+```
+
+#### Allow replication connections
+
+```text
+# Allow replication connections from the subscriber
+host    replication    all    [subscriber_ip]/32    md5
+```
+
+#### Create replication slot
+
+We'll use [wal2json](https://github.com/eulerto/wal2json) plugin, it decodes WAL logs into easy to use JSON format.
+
+```sql
+SELECT * FROM pg_create_logical_replication_slot('logical_decoding_slot', 'wal2json');
+```
+
+#### Generate WAL logs and retrieve them using `wal2json`
+
+We can generate WAL logs by making changes into tables, like inserting or deleting rows. We can use `pg_logical_slot_get_changes` function to view WAL logs in JSON.
+
+Let's insert a record in `post` table
+
+```sql
+INSERT INTO post (title,content) VALUES ('t1','c1');
+```
+
+View WAL logs
+
+```sql
+SELECT * FROM pg_logical_slot_get_changes('logical_decoding_slot', NULL, NULL);
+
+
+    lsn    | xid |                                                                                             data
+-----------+-----+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 0/1BED310 | 757 | {"change":[{"kind":"insert","schema":"public","table":"post","columnnames":["id","title","content"],"columntypes":["integer","character varying(500)","text"],"columnvalues":[5,"t1","c1"]}]}
+```
+
+You can see WAL logs contains LSN(log sequence number) and XID(transaction id).
+
+- LSN is a unique position marker in the WAL stream. Every change recorded in WAL gets a new LSN. It tells you where exactly an operation is recorded. Think of it like a byte offset or a "timestamp" for the WAL logs. It’s important for replication, crash recovery, streaming, etc.
+- XID is an identifier for a transaction. Every transaction gets a unique XID. All changes from the same transaction share the same XID.
+
+## Recommendation
+
+### Debezium
+
+While `wal2json` seems simple to use, but i would recommend to use [debezium](https://debezium.io/documentation/reference/3.1/architecture.html) in production. As it handle many edge cases which may occur in production if something goes wrong.
+
+### TRUNCATE is not DELETE
+
+TRUNCATE quickly removes all rows from a set of tables, behave like DELETE. But, TRUNCATE does not emit `DELETE` operation in WAL for each row, instead it writes a single WAL log per TRUNCATE.
+
+> `wal2json` does not capture table level changes, so you will not see any data in WAL output for TRUNCATE when using `wal2json`. `pgoutput` plugin can be used to capture TRUNCATE. `pgoutput` can also be used with [debezium](https://debezium.io/documentation/reference/3.1/architecture.html) if you are using debezium.
+
+### Table without primary key
+
+`wal2json` or `debezium` generate event for only `INSERT`, when using a table without primary key.
+
+You need to use replica identity feature to capture `UPDATE` or `DELETED`
+
+```sql
+ALTER TABLE <table_name> REPLICA IDENTITY FULL;
+```
+
+### Updating primary key
+
+PostgreSQL will execute first delete operation and then insert operation, when you update primary key of any row. You may need to handle this case in your application.
+
+Let's say you are using email as primary key for users table. You have a logic in WAL consumer to delete data related to user when receiving delete record. So, if you don't consider this case, you'll end up deleting all users data even for email update.
+
+### [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) values
+
+> PostgreSQL uses a fixed page size (commonly 8 kB), and does not allow tuples to span multiple pages. Therefore, it is not possible to store very large field values directly. To overcome this limitation, large field values are compressed and/or broken up into multiple physical rows. This happens transparently to the user, with only small impact on most of the backend code. The technique is affectionately known as TOAST (or “the best thing since sliced bread”). The TOAST infrastructure is also used to improve handling of large data values in-memory.
+
+Since, TOAST values are not stored in WAL logs, you'll not receive them in WAL logs unless there is any update to that column. You may need to consider this case when using CDC.
+
+### Hight Traffic & Low Traffic
+
+Consider a situation, where PostgreSQL instance contains multiple databases and one of them is a high-traffic database. Debezium captures changes in another database that is low-traffic in comparison to the other database. Debezium then cannot confirm the LSN as replication slots work per-database and Debezium is not invoked. As WAL is shared by all databases, the amount used tends to grow until an event is emitted by the database for which Debezium is capturing changes.
+
+Solution -> [postgresql-wal-disk-space](https://debezium.io/documentation/reference/3.0/connectors/postgresql.html#postgresql-wal-disk-space)
+
+## Further Readings
+
+- [Write Ahead Logging (WAL)](https://www.interdb.jp/pg/pgsql09.html)
+- [How Point-in-Time Recovery Works](https://www.interdb.jp/pg/pgsql10/02.html)
+- [Online Backup and Point-In-Time Recovery (PITR)](https://www.interdb.jp/pg/pgsql10.html)
+- [Debezium](https://debezium.io/documentation/reference/3.1/architecture.html)
+- [Debezium connector for PostgreSQL](https://debezium.io/documentation/reference/3.1/connectors/postgresql.html)
+- [Streaming Replication](https://www.interdb.jp/pg/pgsql11.html)
