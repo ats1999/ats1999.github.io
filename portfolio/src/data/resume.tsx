@@ -8,7 +8,9 @@ export const DATA = {
   location: "Delhi, India",
   locationLink: "https://www.google.com/maps/place/delhi",
   title: "Simplicity scales; Complexity fails;",
-  description: "Simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability...",
+  description: [
+    "Simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability.",
+    "Overly complex requirements, excessive modularity, and premature optimization often add unnecessary complexity to a solution."],
   summary: `
 I enjoy turning \`complex\` problems into \`simple\`, scalable and maintainable solutions. Experienced in designing and developing scalable AdTech solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
 

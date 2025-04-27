@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
+import React from "react";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -56,11 +57,13 @@ export default function Page() {
                   text={DATA.title}
                 />
                 <br />
-                <BlurFadeText
-                  className="max-w-[600px]"
-                  delay={BLUR_FADE_DELAY}
-                  text={DATA.description}
-                />
+                {DATA.description.map((desc, idx) => <React.Fragment key={idx}>
+                  <BlurFadeText
+                    className="max-w-[600px]"
+                    delay={BLUR_FADE_DELAY}
+                    text={desc}
+                  /><br />
+                </React.Fragment >)}
               </div>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
