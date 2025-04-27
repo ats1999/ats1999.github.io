@@ -44,27 +44,6 @@ export default function Page() {
                   text={`नमस्ते, I'm ${DATA.name.split(" ")[0]} `}
                 />
               </div>
-
-              <div
-                style={{
-                  fontFamily: "monospace",
-                  marginTop: "50px",
-                }}
-              >
-                <BlurFadeText
-                  className="max-w-[600px] md:text-xl"
-                  delay={BLUR_FADE_DELAY}
-                  text={DATA.title}
-                />
-                <br />
-                {DATA.description.map((desc, idx) => <React.Fragment key={idx}>
-                  <BlurFadeText
-                    className="max-w-[600px]"
-                    delay={BLUR_FADE_DELAY}
-                    text={desc}
-                  /><br />
-                </React.Fragment >)}
-              </div>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-28 border">
@@ -76,6 +55,19 @@ export default function Page() {
         </div>
       </section>
       <section id="about">
+        <BlurFadeText
+          className="max-w-[600px] md:text-xl"
+          delay={BLUR_FADE_DELAY}
+          text={DATA.title}
+        />
+        <br />
+        {DATA.description.map((desc, idx) => <React.Fragment key={idx}>
+          <BlurFadeText
+            className="max-w-[600px]"
+            delay={BLUR_FADE_DELAY}
+            text={desc}
+          /><br />
+        </React.Fragment >)}
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
           <h2 className="text-xl font-bold">About</h2>
         </BlurFade>

@@ -3,6 +3,13 @@
 - https://www.linkedin.com/in/tarundhankhar/
 - https://www.linkedin.com/in/tarundhankhar/
 - https://www.linkedin.com/in/ujjwal8571/
-- https://www.jalshamoviez.it.com/server/12702/the-wheel-of-time-2021-hindi-s01-e01-leavetaking-amazonprime-web-dl.mp4/1.html
 - https://www.linkedin.com/in/aditya-anand-60988b159/overlay/1635543885353/single-media-viewer/?profileId=ACoAACYKBakBlrAoTv_Psty4-yzzq9dncn_Q5I4
   - https://www.linkedin.com/in/aditya-anand-60988b159/
+- https://www.linkedin.com/in/piyusheverhard/
+- https://www.linkedin.com/in/sachidanand-kore/
+- https://www.linkedin.com/in/ayush-shukla-76a8941a3/
+- https://www.linkedin.com/in/chaudhary-kunal/
+- https://www.linkedin.com/in/kingapj/overlay/1742192902673/single-media-viewer/?profileId=ACoAADaeosQBlGoi3aTffKjMKTrQwQwOFfYSNg0
+- https://www.linkedin.com/in/dhiraj-darakhe-751201215/
+- https://www.linkedin.com/in/akhilesh1729/overlay/1720529778798/single-media-viewer/?profileId=ACoAADEFreMBM8_WHItcbnRdNt_bKwnnA-AXsX4
+- https://www.linkedin.com/in/rahulverma50/
