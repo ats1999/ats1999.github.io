@@ -1,0 +1,15 @@
+---
+title: "Leaderless Replication in a Nutshell [TODO]"
+publishedAt: "2025-04-27"
+summary: "Capturing reliable and consistent audit logs is essential for traceability, compliance, and debugging. This blog explores how to build a consistent audit logging system using Change Data Capture (CDC). We’ll cover the core concepts of CDC, how it enables reliable tracking of database changes, and practical implementation tips to ensure your logs are complete, ordered, and tamper-resistant."
+---
+
+## Leader Based Replication
+
+In leader based replication, clients sends write request to leader and leader take care of replicating the changes to other replicas. The leader determines the order in which writes should be processed and followers applies writes in the same order.
+
+Some systems uses leader based replication are:
+
+- MySql
+- Kafka
+- Redis Sentinel
