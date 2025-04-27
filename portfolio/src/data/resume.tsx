@@ -7,11 +7,12 @@ export const DATA = {
   url: "https://ats1999.github.io",
   location: "Delhi, India",
   locationLink: "https://www.google.com/maps/place/delhi",
-  description: "I'm a Software Engineer working at @AdPushup",
+  title: "Simplicity scales; Complexity fails;",
+  description: "Simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability...",
   summary: `
-I enjoy turning complex problems into simple, scalable and maintainable solutions. Experienced in architecting, designing, and implementing scalable solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
+I enjoy turning \`complex\` problems into \`simple\`, scalable and maintainable solutions. Experienced in designing and developing scalable AdTech solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
 
-I began coding in 2019 when I was in 2nd year of engineering. I still remember when I ran my first for loop in the turbo c++ terminal. Since then, I've been programming as a hobby. Around 3 years ago, I ramped up my learning and have been waking up at 4AM to study.
+I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Since then, coding has been my hobby.
   `,
   avatarUrl: "/me.png",
   skills: [

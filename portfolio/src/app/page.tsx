@@ -53,6 +53,12 @@ export default function Page() {
                 <BlurFadeText
                   className="max-w-[600px] md:text-xl"
                   delay={BLUR_FADE_DELAY}
+                  text={DATA.title}
+                />
+                <br />
+                <BlurFadeText
+                  className="max-w-[600px]"
+                  delay={BLUR_FADE_DELAY}
                   text={DATA.description}
                 />
               </div>
