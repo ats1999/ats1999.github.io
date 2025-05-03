@@ -1,0 +1,12 @@
+---
+title: "Kafka and Data Loss: What Most Engineers Miss"
+publishedAt: "2025-04-27"
+summary: "Kafka is designed to be durable by default. Every log message sent to kafka is written to disk and replicated across multiple brokers to ensure fault tolerance. However, under certain conditions, kafka can crash before the data is actually persisted to disk, leading to potential data loss."
+---
+
+- fsync can cause data loss in event of power failure
+- use zone aware nodes to replicate topic in multiple zones to avoid any failure
+- rack-awareness.
+- https://stackoverflow.com/questions/59593362/kafka-rack-awareness-feature
+- https://docs.confluent.io/platform/current/kafka/post-deployment.html#balancing-replicas-across-racks
+- https://jack-vanlightly.com/

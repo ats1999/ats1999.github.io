@@ -98,6 +98,10 @@ export default async function Blog({
           </p>
         </Suspense>
       </div>
+      <div className="prose dark:prose-invert">
+        {post.metadata.summary}
+      </div>
+
       <article
         className="prose dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: post.source }}
