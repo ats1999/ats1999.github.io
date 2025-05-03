@@ -10,7 +10,8 @@ export const DATA = {
   title: "Simplicity scales; Complexity fails;",
   description: [
     "Simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability.",
-    "Overly complex requirements, excessive modularity, and premature optimizations often leads to unnecessary complexity."],
+    "Overly complex requirements, excessive modularity, and premature optimizations often leads to unnecessary complexity.",
+  ],
   summary: `
 I enjoy turning \`complex\` problems into \`simple\`, scalable and maintainable solutions. Experienced in designing and developing scalable AdTech solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
 
@@ -66,17 +67,24 @@ I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Sin
       url: "https://www.dsabyte.com/blog/engineering/programming/java/Learn-how-to-make-HTTP-request-using-plan-Java-Socket-6b924558-1273-4bf6-b97e-8ba7aa3b34e3",
     },
     {
-      title:
-        "A simple group scoped counter system (PostgreSQL/MongoDB/MySql)",
+      title: "A simple group scoped counter system (PostgreSQL/MongoDB/MySql)",
       url: "/blog/counter-system",
     },
     {
-      title: "Building Consistent Audit Log System with Change Data Capture (CDC)",
-      url: "/blog/audit-logs"
-    }, {
-      title: "Write-Ahead Logging (WAL), Change Data Capture (CDC) & PostgreSQL",
-      url: "/blog/wal-cdc-postgressql"
-    }
+      title:
+        "Building Consistent Audit Log System with Change Data Capture (CDC)",
+      url: "/blog/audit-logs",
+    },
+    {
+      title:
+        "Write-Ahead Logging (WAL), Change Data Capture (CDC) & PostgreSQL",
+      url: "/blog/wal-cdc-postgressql",
+    },
+    {
+      title:
+        "Kafka and Data Loss: What Most Engineers Miss",
+      url: "/blog/kafka-rack-aware",
+    },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
