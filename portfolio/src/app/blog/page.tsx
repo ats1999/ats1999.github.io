@@ -42,6 +42,12 @@ export default async function BlogPage() {
 
               </div>
             </Link>
+            <Link
+              className="flex flex-col space-y-1 mb-8 text-blue-500"
+              href={`/blog/${post.slug}`}
+            >
+              Read More 👉
+            </Link>
           </BlurFade>
         ))}
     </section>
