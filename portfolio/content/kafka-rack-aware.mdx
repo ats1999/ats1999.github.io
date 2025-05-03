@@ -4,9 +4,60 @@ publishedAt: "2025-04-27"
 summary: "Kafka is designed to be durable by default. Every log message sent to kafka is written to disk and replicated across multiple brokers to ensure fault tolerance. However, under certain conditions, kafka can crash before the data is actually persisted to disk, leading to potential data loss."
 ---
 
-- fsync can cause data loss in event of power failure
-- use zone aware nodes to replicate topic in multiple zones to avoid any failure
-- rack-awareness.
-- https://stackoverflow.com/questions/59593362/kafka-rack-awareness-feature
-- https://docs.confluent.io/platform/current/kafka/post-deployment.html#balancing-replicas-across-racks
-- https://jack-vanlightly.com/
+## How does kafka persist data to disk?
+
+Kafka uses `write-behind` technique when writing data to the disk. Meaning that it will write data to the page cache (as dirty pages) first and eventually flush these dirty pages to disk.
+
+Flushing dirty pages to disk can be done by OS or kafka. In kafka we can configure flush policy with help of following properties.
+
+```properties
+# The number of messages accumulated on a log partition before messages are flushed to disk
+log.flush.interval.messages
+
+# The maximum time in ms that a message in any topic is kept in memory before flushed to disk
+log.flush.interval.ms
+```
+
+## When Can Kafka Lose Data?
+
+Kafka can lose data if the operating system crashes before its in-memory (dirty) pages are flushed to disk. This can happen due to various reasons such as a system crash, sudden power failure, hardware issues, or even unexpected disasters like a fire in the server room.
+
+## How Does Kafka Guarantee Durability?
+
+Kafka is a distributed system typically deployed as a cluster, and it guarantees durability through replication and recovery mechanisms. Each message written to Kafka is replicated across multiple brokers (nodes) in the in-sync replica (ISR) set. If a broker crashes before flushing data from the OS page cache to disk, it can still recover the data from other brokers in the ISR.
+
+While it’s theoretically possible for all brokers to fail at the exact same moment—before flushing to disk—in practice, such simultaneous failures are extremely rare. This design makes Kafka highly efficient for real-world workloads.
+
+## Tolerating Data Center Failure
+
+If all your Kafka brokers are deployed within the same data center, your system becomes vulnerable to data loss or unavailability in the event of a data center outage.
+
+To mitigate this, Kafka offers a feature called rack awareness. This allows you to define which broker belongs to which "rack" — where a rack can represent a physical rack, a data center, or even an availability zone.
+
+When Kafka replicates partitions, it uses rack information to ensure that replicas are distributed across as many racks as possible. This ensures that even if one rack (or data center) fails, the data remains available from brokers in other racks.
+
+The number of unique racks a partition spans is the minimum of:
+
+- the number of available racks, and
+- the replication factor.
+
+This strategy significantly increases Kafka’s fault tolerance and helps it survive even full data center failures.
+
+### Tolerating Data Center Failure Without Multiple Data Centers
+
+You can set `log.flush.interval.messages=1` in Kafka, which ensures that `fsync` is called after every message is written. This provides strong durability guarantees even in the event of a data center failure.
+
+> Note: This can lead to a performance drop of up to 3x.
+
+## Why `fsync`?
+
+You might be wondering why Kafka relies on `fsync`, even though it can potentially lead to data loss. Here’s why:
+
+- Flushing to disk after every message significantly impacts performance.
+- Kafka doesn't maintain a separate in-memory cache. Instead, it leverages the operating system's page cache, avoiding double buffering and reducing memory overhead.
+- Relying on the OS page cache also ensures that the cache remains warm even after a broker restart, improving recovery speed and performance.
+
+## References
+
+- [kafka-rack-awareness-feature](https://stackoverflow.com/questions/59593362/kafka-rack-awareness-feature)
+- [balancing-replicas-across-racks](https://docs.confluent.io/platform/current/kafka/post-deployment.html#balancing-replicas-across-racks)

@@ -98,7 +98,7 @@ export default async function Blog({
           </p>
         </Suspense>
       </div>
-      <div className="prose dark:prose-invert">
+      <div className="prose dark:prose-invert mb-10">
         {post.metadata.summary}
       </div>
 
