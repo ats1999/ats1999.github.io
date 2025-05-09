@@ -81,8 +81,11 @@ I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Sin
       url: "/blog/wal-cdc-postgressql",
     },
     {
-      title:
-        "Kafka and Data Loss: What Most Engineers Miss",
+      title: "Concurrency Redefined",
+      url: "/blog/concurrency-redefined",
+    },
+    {
+      title: "Kafka and Data Loss: What Most Engineers Miss",
       url: "/blog/kafka-rack-aware",
     },
   ],
