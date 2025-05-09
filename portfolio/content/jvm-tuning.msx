@@ -1,0 +1,9 @@
+- https://www.gridgain.com/docs/latest/perf-troubleshooting-guide/memory-tuning
+- which garbage collector to choose
+- what is new generation heap vs old generation heap
+- how to analyse heap dump
+- why Stop-The-World (STW) pauses happens
+- GC algo selection
+- https://sematext.com/blog/jvm-performance-tuning/
+- https://stackoverflow.com/questions/564039/jvm-performance-tuning-for-large-applications
+- https://www.linkedin.com/pulse/java-jvm-performance-tuning-ph%C3%A1t-l%C3%A0u/
