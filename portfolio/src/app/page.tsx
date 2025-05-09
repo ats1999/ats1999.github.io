@@ -77,6 +77,45 @@ export default function Page() {
           </Markdown>
         </BlurFade>
       </section>
+      <section id="latest-blogs">
+        <div className="space-y-5 w-full py-12">
+          <BlurFade delay={BLUR_FADE_DELAY * 11}>
+            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+              <div className="space-y-2">
+                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
+                  Latest Blogs{" "}
+                </div>
+              </div>
+            </div>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 8 * 0.05}>
+            <ul
+              style={{
+                listStyleType: "disclosure-closed",
+                gap: "10px",
+              }}
+              id="latest-blogs-list"
+            >
+              {[{ title: "View More", url: "/blog/" }, ...DATA.latestBlogs].reverse().map((blog, id) => (
+                <li
+                  key={blog.url}
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                  className="latest-blogs-list-item"
+                >
+                  <Link
+                    className="text-blue-500 hover:underline"
+                    href={blog.url}
+                  >
+                    {blog.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </BlurFade>
+        </div>
+      </section>
       <section id="work">
         <div className="flex min-h-0 flex-col gap-y-3">
           <BlurFade delay={BLUR_FADE_DELAY * 5}>
@@ -139,45 +178,7 @@ export default function Page() {
           </div>
         </div>
       </section>
-      <section id="latest-blogs">
-        <div className="space-y-5 w-full py-12">
-          <BlurFade delay={BLUR_FADE_DELAY * 11}>
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-foreground text-background px-3 py-1 text-sm">
-                  Latest Blogs{" "}
-                </div>
-              </div>
-            </div>
-          </BlurFade>
-          <BlurFade delay={BLUR_FADE_DELAY * 8 * 0.05}>
-            <ul
-              style={{
-                listStyleType: "disclosure-closed",
-                gap: "10px",
-              }}
-              id="latest-blogs-list"
-            >
-              {[{ title: "View More", url: "/blog/" }, ...DATA.latestBlogs].reverse().map((blog, id) => (
-                <li
-                  key={blog.url}
-                  style={{
-                    marginBottom: "10px",
-                  }}
-                  className="latest-blogs-list-item"
-                >
-                  <Link
-                    className="text-blue-500 hover:underline"
-                    href={blog.url}
-                  >
-                    {blog.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </BlurFade>
-        </div>
-      </section>
+
 
       <section id="projects">
         <div className="space-y-12 w-full py-12">
