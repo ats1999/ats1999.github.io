@@ -35,3 +35,17 @@ export function formatDate(date: string) {
     return `${fullDate} (${yearsAgo}y ago)`;
   }
 }
+
+/**
+ * Truncates a string by number of words.
+ * @param text - The original string.
+ * @param wordLimit - Maximum number of words to keep.
+ * @returns Truncated string with ellipsis if truncated.
+ */
+export function truncateByWords(text: string, wordLimit: number): string {
+  const words = text.trim().split(/\s+/); // Split by any whitespace
+  if (words.length <= wordLimit) {
+    return text;
+  }
+  return words.slice(0, wordLimit).join(' ') + '...';
+}

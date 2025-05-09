@@ -1,6 +1,6 @@
 import BlurFade from "@/components/magicui/blur-fade";
 import { getBlogPosts } from "@/data/blog";
-import { formatDate } from "@/lib/utils";
+import { formatDate, truncateByWords } from "@/lib/utils";
 import Link from "next/link";
 
 export const metadata = {
@@ -38,7 +38,7 @@ export default async function BlogPage() {
                   {formatDate(post.metadata.publishedAt)}
                 </p>
                 <h1 className="font-bold text-xl text-muted-foreground">{post.metadata.title}</h1>
-                <p>{post.metadata.summary}</p>
+                <p>{truncateByWords(post.metadata.summary, 30)}</p>
 
               </div>
             </Link>
