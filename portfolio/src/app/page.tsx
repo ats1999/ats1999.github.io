@@ -87,13 +87,14 @@ export default function Page() {
                 </div>
               </div>
             </div> */}
-            <h2 className="text-xl font-bold">About</h2>
+            <h2 className="text-xl font-bold">Latest Blogs</h2>
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 8 * 0.05}>
             <ul
               style={{
                 listStyleType: "disclosure-closed",
                 gap: "10px",
+                marginLeft: "20px"
               }}
               id="latest-blogs-list"
             >
