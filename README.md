@@ -2,5 +2,5 @@ Credit -> https://portfolio-magicui.vercel.app/
 
 ```sh
 # copy files
-cp -r portfolio/out/* .
+cd portfolio && npm run build && cd .. && cp -r portfolio/out/* . && git add . && git commit "new deployment" && git push
 ```
