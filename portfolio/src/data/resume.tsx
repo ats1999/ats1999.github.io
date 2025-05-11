@@ -55,7 +55,7 @@ I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Sin
       url: "https://www.dsabyte.com/blog/engineering/system-design/Synchronization-in-Distributed-Task-Processing-Leveraging-Distributed-Locks-1c43d996-0384-491a-b314-fb7705366c24",
     },
     {
-      title: "Test Containers : A Integration Testing Weapon",
+      title: "Test Containers : An Integration Testing Weapon",
       url: "/blog/test-containers",
     },
     {
