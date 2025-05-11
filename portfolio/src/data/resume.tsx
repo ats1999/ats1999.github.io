@@ -10,7 +10,7 @@ export const DATA = {
   title: "Simplicity scales; Complexity fails;",
   description: [
     "Simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability.",
-    "Overly complex requirements, poor upfront planning, and premature optimizations often lead to unnecessary complexity"
+    "Overly complex requirements, poor upfront planning, and premature optimizations often lead to unnecessary complexity",
   ],
   summary: `
 I enjoy turning \`complex\` problems into \`simple\`, scalable and maintainable solutions. Experienced in designing and developing scalable AdTech solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
@@ -53,6 +53,10 @@ I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Sin
       title:
         "Synchronization in Distributed Task Processing: Leveraging Distributed Locks",
       url: "https://www.dsabyte.com/blog/engineering/system-design/Synchronization-in-Distributed-Task-Processing-Leveraging-Distributed-Locks-1c43d996-0384-491a-b314-fb7705366c24",
+    },
+    {
+      title: "Test Containers : A Integration Testing Weapon",
+      url: "/blog/test-containers",
     },
     {
       title: "Graceful Shutdown & Spring Boot",

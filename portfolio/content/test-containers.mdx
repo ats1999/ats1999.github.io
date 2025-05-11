@@ -1,0 +1,48 @@
+---
+title: "Test Containers : A Integration Testing Weapon"
+publishedAt: "2025-05-11"
+summary: "Testcontainers is a set of open source libraries that provides easy and lightweight APIs for bootstrapping local development and test dependencies with real services wrapped in Docker containers. Using Testcontainers, you can write tests that depend on the same services you use in production without mocks or in-memory services."
+---
+
+> Sharing a powerful tool you should know about
+
+## Why Use Testcontainers?
+
+- Say goodbye to mocking external dependencies
+- No need to manually install or clean up services for testing
+- Run parallel tests without interference or port conflicts
+- No more hunting for in-memory alternatives
+- And much more — check out the [Getting Started Guide](https://testcontainers.com/getting-started/)
+
+## Example
+
+```java
+import org.junit.jupiter.api.Test;
+import org.testcontainers.containers.PostgreSQLContainer;
+
+public class PostgresTest {
+
+    @Test
+    void testDatabase() {
+        try (PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.1")) {
+            postgres.start();
+
+            String jdbcUrl = postgres.getJdbcUrl();
+            String username = postgres.getUsername();
+            String password = postgres.getPassword();
+
+            // Use these credentials to run your integration test
+        }
+    }
+}
+
+```
+
+## ⚡ Bonus: Reuse Containers for Faster Tests
+
+In long test suites, container spin-up time can become an issue. Testcontainers offers reusable containers to persist containers across test runs—perfect for speeding up local development.
+
+```java
+PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15.1")
+        .withReuse(true);
+```
