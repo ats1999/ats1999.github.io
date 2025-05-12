@@ -24,10 +24,11 @@ export async function markdownToHTML(markdown: string) {
     .use(remarkRehype)
     .use(rehypePrettyCode, {
       // https://rehype-pretty.pages.dev/#usage
-      theme: {
-        light: "min-light",
-        dark: "min-dark",
-      },
+      // FIXME: code block is not rendering properly. Few words of codeblocks getting same color as background, so they are not visible. 
+      // theme: {
+      //   light: "min-light",
+      //   dark: "min-dark",
+      // },
       keepBackground: false,
     })
     .use(rehypeStringify)
