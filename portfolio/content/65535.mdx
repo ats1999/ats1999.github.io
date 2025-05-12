@@ -1,0 +1,62 @@
+---
+title: "How Do Servers Handle More Than 65,535 TCP Connections?"
+publishedAt: "2025-05-12"
+summary: "When working with TCP/IP, it’s commonly known that the source and destination ports are 16-bit numbers. That means the theoretical maximum number of TCP connections a server can have with a single IP and port is 65,535. But if that’s the case, how do modern servers manage hundreds of thousands or even millions of concurrent client connections?"
+---
+
+### Understanding the Basics: What Are TCP Ports?
+
+TCP (Transmission Control Protocol) uses port numbers to identify unique connections between clients and servers. A typical TCP connection is uniquely identified by a 4-tuple:
+
+- Source IP
+- Source Port
+- Destination IP
+- Destination Port
+
+This tuple ensures that each connection is unique, even if multiple clients connect to the same server port.
+
+### Why the 65,535 Limit Isn’t Really a Limit?
+
+The 65,535 port limit applies only to the number of unique port numbers per IP address. However, this doesn't restrict the number of TCP connections a server can handle.
+
+Here's why:
+
+- Each client connection typically has a unique source IP and source port.
+- Even if all connections target the same destination IP and port (e.g., a web server on port 443), the combination of source IP and source port on the client side makes each connection unique.
+- Therefore, the server can handle many more than 65,535 connections, provided that the clients are using different IP:port combinations.
+
+### Example: Unique TCP Connections
+
+Let’s assume:
+
+- A server is listening on 192.168.1.10:443
+- Multiple clients connect with the following 4-tuples:
+
+```text
+Client A → 192.168.1.10:443 from 10.0.0.1:50100
+Client B → 192.168.1.10:443 from 10.0.0.2:50100
+Client C → 192.168.1.10:443 from 10.0.0.1:50101
+```
+
+Even though Clients A and B use the same source port, their source IPs are different, making the connections unique.
+
+### What Actually Limits Connections?
+
+While TCP/IP allows for millions of connections, practical limits include:
+
+- Available RAM (each connection consumes memory)
+- CPU overhead (especially with SSL/TLS)
+- File descriptor limits (`ulimit -n` on Linux)
+- Network bandwidth
+
+### Conclusion
+
+The 65,535 port number limit is often misunderstood. It's not a hard limit on concurrent connections but a limit on port numbers per IP. Thanks to the uniqueness of TCP's 4-tuple and techniques like load balancing, IP aliasing, and tuning system parameters, servers today can easily handle millions of TCP connections simultaneously.
+
+So the next time someone mentions the 65K connection limit, you’ll know better—modern networking is far more scalable than it might seem at first glance.
+
+### Further Readings
+
+- [https://superuser.com/questions/1078309/why-do-computers-have-65-535-tcp-ports](https://superuser.com/questions/1078309/why-do-computers-have-65-535-tcp-ports)
+- [https://stackoverflow.com/questions/44605797/in-a-tcp-connection-how-possibly-can-a-server-handle-more-than-65535-client-at](https://stackoverflow.com/questions/44605797/in-a-tcp-connection-how-possibly-can-a-server-handle-more-than-65535-client-at)
+- [https://serverfault.com/questions/533611/how-do-high-traffic-sites-service-more-than-65535-tcp-connections](https://serverfault.com/questions/533611/how-do-high-traffic-sites-service-more-than-65535-tcp-connections)

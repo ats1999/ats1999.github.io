@@ -63,6 +63,10 @@ I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Sin
       url: "https://www.dsabyte.com/blog/engineering/full-stack/spring-boot/Graceful-Shutdown--Spring-Boot-6d136544-f4e1-427b-b4b6-3285bfed877f",
     },
     {
+      title: "How Do Servers Handle More Than 65,535 TCP Connections?",
+      url: "/blog/65535",
+    },
+    {
       title: "Using Custom Annotation in Spring Boot",
       url: "https://www.dsabyte.com/blog/engineering/full-stack-development/back-end/spring-boot/Custom-Annotation--Spring-Boot-ab208895-83fc-4196-9049-b4f5be4ef457",
     },
