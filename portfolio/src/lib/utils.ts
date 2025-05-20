@@ -47,5 +47,5 @@ export function truncateByWords(text: string, wordLimit: number): string {
   if (words.length <= wordLimit) {
     return text;
   }
-  return words.slice(0, wordLimit).join(' ') + '...';
+  return words.slice(0, wordLimit).join(" ") + "...";
 }
