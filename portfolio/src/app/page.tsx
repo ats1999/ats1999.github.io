@@ -41,7 +41,8 @@ export default function Page() {
                   delay={BLUR_FADE_DELAY}
                   className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
                   yOffset={8}
-                  text={`नमस्ते, I'm ${DATA.name.split(" ")[0]} `}
+                  // नमस्ते
+                  text={`Hey, I'm ${DATA.name.split(" ")[0]} `}
                 />
               </div>
             </div>
@@ -69,7 +70,7 @@ export default function Page() {
           /><br />
         </React.Fragment >)}
         <BlurFade delay={BLUR_FADE_DELAY * 3}>
-          <h2 className="text-xl font-bold">About</h2>
+          <h2 className="text-xl font-bold">About Me</h2>
         </BlurFade>
         <BlurFade delay={BLUR_FADE_DELAY * 4}>
           <Markdown className="prose max-w-full text-pretty font-sans text-sm text-muted-foreground dark:prose-invert">
@@ -78,7 +79,7 @@ export default function Page() {
         </BlurFade>
       </section>
       <section id="latest-blogs">
-        <div className="space-y-5 w-full py-12">
+        <div className="space-y-5 w-full">
           <BlurFade delay={BLUR_FADE_DELAY * 11}>
             {/* <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">

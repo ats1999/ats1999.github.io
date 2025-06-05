@@ -7,16 +7,13 @@ export const DATA = {
   url: "https://ats1999.github.io",
   location: "Delhi, India",
   locationLink: "https://www.google.com/maps/place/delhi",
-  title: "Simplicity scales; Complexity fails;",
+  title: "A Software Engineer, who believes: Simplicity scales; Complexity fails;",
   description: [
-    "Simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability.",
-    "Overly complex requirements, poor upfront planning, and premature optimizations often lead to unnecessary complexity",
+    "As per my experience, simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability.",
+    // "Overly complex requirements, poor upfront planning, and premature optimizations often lead to unnecessary complexity",
   ],
   summary: `
-I enjoy turning \`complex\` problems into \`simple\`, scalable and maintainable solutions. Experienced in designing and developing scalable AdTech solutions that automate the buying, and optimization of digital advertising inventory in real-time. Proficient in Kafka, Java, Spring Boot, NodeJs, and a variety of distributed and real-time technologies.
-
-I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Since then, coding has been my hobby.
-  `,
+  I have 3+ years of experience in designing and developing scalable, distributed, and real-time systems. I have a strong foundation in data structures, algorithms, and system design, which allows me to create efficient and robust solutions. My expertise lies in building high-performance AdTech solutions that automate the buying, and optimization of digital advertising inventory in real-time.`,
   avatarUrl: "/me.png",
   skills: [
     "Java",
@@ -91,6 +88,14 @@ I began coding in 2019, ran my first \`for\` loop in the turbo c++ terminal. Sin
     {
       title: "Concurrency Redefined",
       url: "/blog/concurrency-redefined",
+    },
+    {
+      title: "Why email address should't be used as primary key?",
+      url: "/blog/pk-email/",
+    },
+    {
+      title: "Choosing a database design for multi tenant application!",
+      url: "/blog/database-design-for-multi-tenant/",
     },
     {
       title: "Kafka and Data Loss: What Most Engineers Miss",
