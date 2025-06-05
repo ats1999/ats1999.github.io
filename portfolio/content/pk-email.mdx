@@ -1,0 +1,36 @@
+---
+title: "Why email address should't be used as primary key?"
+publishedAt: "2025-06-05"
+summary: "Uniquely identifying users is a fundamental requirement in most software systems. While using email addresses as primary keys is common and often convenient, there are important reasons why this approach can lead to issues and should generally be avoided."
+---
+
+## Data Privacy
+
+Many web applications display user-related information such as profiles, contributors, or authors. For example, a blog platform might link an article to the author’s profile. In such cases, the link usually contains a unique identifier for the user.
+
+If the email address is used as the primary key, it will likely appear in URLs, API responses, or page metadata. This unintentionally exposes the user's private email address to the public, compromising their privacy.
+
+## Slow Updates
+
+Email addresses are not immutable—users may change them due to job changes, rebranding, or personal preferences. If the email is used as the primary key, updating it becomes costly and error-prone.
+
+Since primary keys are referenced by foreign keys across various tables (e.g., posts, comments, orders), changing the email means all those references need to be updated as well. This can lead to performance issues, cascading updates, or even data inconsistency if some references are missed.
+
+## External Resources
+
+Beyond your database, systems often store external assets like files, images, or videos. If those assets are named, stored, or tagged using the user's email address, a change in the email forces a re-mapping of all associated resources.
+
+For instance, if profile images are saved as `/images/users/jane@example.com.png`, changing the email to `jane.doe@example.com` breaks the reference unless you rename or duplicate the file—both of which add overhead and complexity.
+
+## What Should Be Used?
+
+Instead of using email addresses as primary keys, it's best to use surrogate keys—typically an auto-incrementing integer ID or a UUID (Universally Unique Identifier).
+
+These types of keys have several advantages:
+
+- ✅ Immutable: They don’t change, even if user details like email do.
+- ✅ Opaque: They reveal nothing about the user’s personal information.
+- ✅ Efficient: They are better optimized for indexing and querying, especially in large databases.
+- ✅ Consistent: They're easier to use in foreign key relationships, external storage, and APIs.
+
+> Meanwhile, email addresses can still be stored as a unique indexed field and used for login or communication—but not as a reference point for internal logic.
