@@ -239,29 +239,6 @@ export const DATA = {
       video: "",
     },
     {
-      title: "Distribted URL Shortner",
-      href: "https://github.com/ats1999/URL-Shortner?tab=readme-ov-file",
-      dates: "July 2023 - Aug 2023",
-      active: true,
-      description:
-        "A high-performance service to generate unique, length-constrained short URLs for long URLs. The service utilized ZooKeeper for distributed counter management across nodes, ensuring collision prevention, high availability, and scalability. MongoDB was used for data persistence, while Redis optimized performance with caching. Built with Java and Spring Boot, the system efficiently handles large-scale requests.",
-      technologies: ["Java", "Spring Boot", "ZooKeeper", "MongoDB", "Redis"],
-      links: [
-        {
-          type: "Website",
-          href: "https://github.com/ats1999/URL-Shortner",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/ats1999/URL-Shortner",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "/projects/usort.png",
-      video: "",
-    },
-    {
       title: "Open Graph Image Generator",
       href: "https://ogp.dsabyte.com",
       dates: "Sept 2023 - Oct 2023",
@@ -284,6 +261,49 @@ export const DATA = {
         },
       ],
       image: "/projects/ogp.png",
+      video: "",
+    },
+    {
+      title: "JSON Diff Visualizer",
+      href: "https://json-diff-matter.vercel.app",
+      dates: "Jan 2024 - Jan 2024",
+      active: true,
+      description:
+        "A web-based tool to visually compare two JSON files and highlight structural and value differences using a clean, interactive UI. Implemented recursive diffing logic to detect added, removed, and modified keys at any nesting level. Designed for developers to debug APIs or config changes with ease, featuring collapsible tree views and color-coded diffs.",
+      technologies: [
+        "HTML", "CSS", "JavaScript",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://json-diff-matter.vercel.app",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "/projects/json-diff.png",
+      video: "",
+    },
+    {
+      title: "Distribted URL Shortner",
+      href: "https://github.com/ats1999/URL-Shortner?tab=readme-ov-file",
+      dates: "July 2023 - Aug 2023",
+      active: true,
+      description:
+        "A high-performance service to generate unique, length-constrained short URLs for long URLs. The service utilized ZooKeeper for distributed counter management across nodes, ensuring collision prevention, high availability, and scalability. MongoDB was used for data persistence, while Redis optimized performance with caching. Built with Java and Spring Boot, the system efficiently handles large-scale requests.",
+      technologies: ["Java", "Spring Boot", "ZooKeeper", "MongoDB", "Redis"],
+      links: [
+        {
+          type: "Website",
+          href: "https://github.com/ats1999/URL-Shortner",
+          icon: <Icons.globe className="size-3" />,
+        },
+        {
+          type: "Source",
+          href: "https://github.com/ats1999/URL-Shortner",
+          icon: <Icons.github className="size-3" />,
+        },
+      ],
+      image: "/projects/usort.png",
       video: "",
     },
     {

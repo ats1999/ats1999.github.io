@@ -6,6 +6,7 @@ import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
+import remarkGfm from "remark-gfm";
 
 type Metadata = {
   title: string;
@@ -21,10 +22,11 @@ function getMDXFiles(dir: string) {
 export async function markdownToHTML(markdown: string) {
   const p = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypePrettyCode, {
       // https://rehype-pretty.pages.dev/#usage
-      // FIXME: code block is not rendering properly. Few words of codeblocks getting same color as background, so they are not visible. 
+      // FIXME: code block is not rendering properly. Few words of codeblocks getting same color as background, so they are not visible.
       // theme: {
       //   light: "min-light",
       //   dark: "min-dark",
