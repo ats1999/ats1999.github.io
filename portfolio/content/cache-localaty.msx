@@ -1,0 +1,31 @@
+package org.w3worker.academy;
+
+public class JMarch {
+  public static void main(String[] args) {
+      final int SIZE = 10_000_000;
+      int[] arr = new int[SIZE];
+
+      System.out.println("Warming up...");
+      for (int i = 0; i < SIZE; i++) {
+          arr[i] = 0;
+      }
+
+      // Sequential access: 10M writes
+      long startSequential = System.nanoTime();
+      for (int i = 0; i < SIZE; i++) {
+          arr[i] = i;
+      }
+      long endSequential = System.nanoTime();
+      System.out.println("Sequential access time: " + (endSequential - startSequential) / 1_000_000.0 + " ms");
+
+      // Strided access: 10M writes by writing 64 times per step
+      long startStrided = System.nanoTime();
+      for (int i = 0; i < SIZE; i += 64) {
+          for (int j = 0; j < 64 && i + j < SIZE; j++) {
+              arr[i + j] = i + j;
+          }
+      }
+      long endStrided = System.nanoTime();
+      System.out.println("Strided-like access time: " + (endStrided - startStrided) / 1_000_000.0 + " ms");
+  }
+}
