@@ -59,13 +59,13 @@ In this approach, each tenant gets its own database schema within a single share
 
 From a design perspective, this approach is somewhat similar to the Database Per Tenant model, but with significantly lower infrastructure overhead. Since all schemas live within the same database, you can reuse a shared connection pool, reducing the cost of maintaining multiple database connections.
 
-However, it's important to note that not all relational databases support schemas in the same way. PostgreSQL and SQL Server support schemas well, while MySQL has limited support.
+However, it's important to note that not all relational databases support schemas in the same way. PostgreSQL and SQL Server support schemas well, while MySQL has no support.
 
 When should we use this approach:
 
 - When your customers are comfortable storing their data alongside other tenants in the same database.
 - When you have a small to medium number of tenants (typically fewer than 10,000). A large number of schemas can increase memory usage and potentially create performance bottlenecks.
-- Your database supports schemas well (e.g., PostgreSQL, SQL Server).
+- Your database supports schemas well (e.g., PostgreSQL, SQL Server, MongoDB).
 - You want to run tenant-specific backups or migrations independently.
 
 ### ORM & Framework Support
@@ -75,24 +75,56 @@ When should we use this approach:
 
 ### Discriminator Column
 
-In this approach, we add a `tenant_id` column in every table to identity rows belongs to the tenant.
+In this approach, we add a `tenant_id` column in every table to identify rows belongs to the tenant.
 
 | col_1 | col_2  | tenant_id |
 | ----- | ------ | --------- |
 | Row 1 | Data   | 1         |
 | Row 2 | Values | 2         |
 
-This approach have lower degree of data isolation and security, but higher degree of scalability than other two approaches. It significantly reduces maintenance effort and schema migration overheads, at the same time it increases development efforts.
+This approach have lower degree of data isolation and security, but higher degree of scalability than above two approaches. It significantly reduces maintenance effort and schema migration overheads, at the same time it increases development efforts.
 
-In this approach data isolation provided by the application layer, so queries needs to be designed carefully.
+In this approach data isolation provided by the application layer, whereas other two approaches provides data isolation without any additional effort.
 
 ### When should we use this approach?
 
 - When your customers are comfortable storing their data alongside other tenants in the same database.
-- When you have enough time to put in additional development effort.
+- When you have enough time to put in additional development effort. You should go with one of the above two approaches when building MVP.
 
 ### ORM & Framework Support
 
 - [hibernate](https://docs.jboss.org/hibernate/orm/4.2/devguide/en-US/html/ch16.html)
 - [Spring-Boot](https://spring.io/blog/2022/07/31/how-to-integrate-hibernates-multitenant-feature-with-spring-data-jpa-in-a-spring-boot-application)
 - [Prisma](https://github.com/prisma/prisma/discussions/2846)
+
+### Don’t Use `tenant_id` in the Primary Key
+
+A common mistake in multi-tenant systems is including `tenant_id` as part of the primary key.
+
+For example:
+
+```sql
+CREATE TABLE users(
+    id <data_type>,
+    tenant_id <data_type>,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    PRIMARY KEY (tenant_id,id)
+)
+```
+
+While this might make sense to have `tenant_id` in primary key, but it can lead to complexity in querying and joins, ripple effect when deleting/modifying primary keys on every other table, etc.
+
+## Summary
+
+We have seen three approaches to design multi-tenancy database. Below is the metric table that summarizes when should we use any approach.
+
+| \*                 | Database Per Tenant                                                        | Schema Per Tenant | Discriminator Column |
+| ------------------ | -------------------------------------------------------------------------- | ----------------- | -------------------- |
+| Security           | High                                                                       | Moderate          | Low                  |
+| Data Isolation     | High                                                                       | Moderate          | Low                  |
+| Scalability        | Low                                                                        | Moderate          | High                 |
+| Maintenance        | High                                                                       | Moderate          | Low                  |
+| Development Effort | Moderate (Higher than schema per tenant due to connection pool management) | Low               | High                 |
+| No. of tenants     | <=100                                                                      | <=10000           | Unlimited            |
+| Database Support   | All Databases                                                              | Few Databases     | All Databases        |
