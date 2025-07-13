@@ -7,7 +7,8 @@ export const DATA = {
   url: "https://ats1999.github.io",
   location: "Delhi, India",
   locationLink: "https://www.google.com/maps/place/delhi",
-  title: "A Software Engineer, who believes: Simplicity scales; Complexity fails;",
+  title:
+    "A Software Engineer, who believes: Simplicity scales; Complexity fails;",
   description: [
     "As per my experience, simple systems are easier to understand, manage, and maintain. Excessive complexity can lead to bottlenecks, difficulties in maintenance, and challenges in adapting to change, ultimately hindering scalability.",
     // "Overly complex requirements, poor upfront planning, and premature optimizations often lead to unnecessary complexity",
@@ -96,6 +97,10 @@ export const DATA = {
     {
       title: "Choosing a database design for multi tenant application!",
       url: "/blog/database-design-for-multi-tenant/",
+    },
+    {
+      title: "A lesson from debugging websocket disconnect!",
+      url: "/blog/a-lesson-from-debugging-websocket-disconnect",
     },
     {
       title: "Kafka and Data Loss: What Most Engineers Miss",
@@ -270,9 +275,7 @@ export const DATA = {
       active: true,
       description:
         "A web-based tool to visually compare two JSON files and highlight structural and value differences using a clean, interactive UI. Implemented recursive diffing logic to detect added, removed, and modified keys at any nesting level. Designed for developers to debug APIs or config changes with ease, featuring collapsible tree views and color-coded diffs.",
-      technologies: [
-        "HTML", "CSS", "JavaScript",
-      ],
+      technologies: ["HTML", "CSS", "JavaScript"],
       links: [
         {
           type: "Website",
