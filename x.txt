@@ -1,2 +1,6 @@
 - ssh user name = rahul
 - ssh user pass = Rahul@thakur
+
+- for update vs for no key update
+- efficient batch inserts
+- id systems
